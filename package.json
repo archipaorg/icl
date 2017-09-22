@@ -11,7 +11,7 @@
     "url": "git+https://github.com/archipaorg/icl"
   },
   "homepage": "https://github.com/archipaorg/icl/blob/master/README.md",
-  "license": "MPL 2.0",
+  "license": "MPL-2.0",
   "scripts": {
     "pretest": "rm -rf ./dist/* && ./scripts/build.sh && tsc -p ./src",
     "test": "./node_modules/mocha/bin/mocha --recursive ./tests",
