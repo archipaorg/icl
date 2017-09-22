@@ -1,5 +1,3 @@
-///<reference path="../typings/jison.d.ts"/>
-
 'use strict';
 
 import * as extend from 'extend';
