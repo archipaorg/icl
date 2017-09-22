@@ -31,6 +31,7 @@ import {ASTNodeType} from '../core/enums/astNodeType';
 import {IDisposable} from '../core/types/common';
 import {Hash, IICLCompiler, LexYaccError} from '../core/types/analysis';
 import {Inheritance} from '../core/ast/declaration/settings/inheritance';
+import {Helper} from '../compiler/grammar/helper';
 
 /**
  * IclParser
@@ -73,6 +74,7 @@ export class ICLCompiler implements IICLCompiler<string, ConfigurationFile>, IDi
         this.lexYaccParser.yy.EOF = EOF;
         this.lexYaccParser.yy.ASTNodeType = ASTNodeType;
         this.lexYaccParser.yy.ASTNodeKind = ASTNodeKind;
+        this.lexYaccParser.yy.Helper = Helper;
     }
 
 

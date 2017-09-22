@@ -206,7 +206,7 @@ CLOSE_BRACKET                                           ']'
 configuration_file:
                 configuration_file_content EOF {
                     // create a ConfiurationFile instance
-                    $$ = createConfigurationFile(yy, @1, @1);
+                    $$ = yy.Helper.createConfigurationFile(yy, @1, @1);
                     $$.addElements($1);              
                     return $$;
                 }
@@ -230,7 +230,7 @@ configuration_file_content:
                     }
                }       
                | {
-                    $$ = createEOF(yy, @$);
+                    $$ = yy.Helper.createEOF(yy, @$);
                 }
             ;
 
@@ -239,18 +239,18 @@ settings_block:
               // match block id + block name eg: variable "var1" 1
              IDENTIFIER hierarchy_levels alias settings_block_value {
                 // create identifier 
-                var identifierNode = createIdentifier(yy, @1, @1, $1);
+                var identifierNode = yy.Helper.createIdentifier(yy, @1, @1, $1);
                 // create namespace 
-                var namespaceNode = createArrayExpression(yy, @2, @2, $2);
+                var namespaceNode = yy.Helper.createArrayExpression(yy, @2, @2, $2);
                 namespaceNode.addElements($2);
                 // create bundle
-                var bundleNode = createBundle(yy, @1, @2, identifierNode, namespaceNode);
+                var bundleNode = yy.Helper.createBundle(yy, @1, @2, identifierNode, namespaceNode);
 
                 // create alias
                 var aliasNode = $3;
 
                 // create setting block declaration node
-                $$ = createSettingsBlockDeclaration(yy, @1, @4);
+                $$ = yy.Helper.createSettingsBlockDeclaration(yy, @1, @4);
                 $$.bundle = bundleNode;
                 $$.alias = aliasNode;
                 $$.value = $4;
@@ -264,24 +264,24 @@ settings_block:
              | IDENTIFIER hierarchy_levels alias FROM parent_block_list single_param settings_block_value {
                 
                 // create identifier 
-                var identifierNode = createIdentifier(yy, @1, @1, $1);
+                var identifierNode = yy.Helper.createIdentifier(yy, @1, @1, $1);
                 // create namespace 
-                var namespaceNode = createArrayExpression(yy, @2, @2, $2);
+                var namespaceNode = yy.Helper.createArrayExpression(yy, @2, @2, $2);
                 namespaceNode.addElements($2);
                 // create bundle
-                var bundleNode = createBundle(yy, @1, @2, identifierNode, namespaceNode);
+                var bundleNode = yy.Helper.createBundle(yy, @1, @2, identifierNode, namespaceNode);
 
                 // create alias
                 var aliasNode = $3;
 
-                var inheritanceNode = createArrayExpression(yy, @5, @5);                
+                var inheritanceNode = yy.Helper.createArrayExpression(yy, @5, @5);                
                 inheritanceNode.addElements($5);
                 // create inheritance
-                var inheritanceDeclaratorNode = createSettingsBlockInheritanceDeclaration(yy, @4, @5, createKeyword(yy, @4, @4, $4), inheritanceNode);
+                var inheritanceDeclaratorNode = yy.Helper.createSettingsBlockInheritanceDeclaration(yy, @4, @5, yy.Helper.createKeyword(yy, @4, @4, $4), inheritanceNode);
                 // get Param
 
                 // create setting block declaration node
-                $$ = createSettingsBlockDeclaration(yy, @1, @7);
+                $$ = yy.Helper.createSettingsBlockDeclaration(yy, @1, @7);
                 $$.bundle = bundleNode;
                 $$.inheritFrom = inheritanceDeclaratorNode;
                 $$.alias = aliasNode;
@@ -296,25 +296,25 @@ settings_block:
              }
              | IDENTIFIER hierarchy_levels alias param_list FROM parent_block_list single_param settings_block_value {
                 // create identifier 
-                var identifierNode = createIdentifier(yy, @1, @1, $1);
+                var identifierNode = yy.Helper.createIdentifier(yy, @1, @1, $1);
                 // create namespace 
-                var namespaceNode = createArrayExpression(yy, @2, @2, $2);
+                var namespaceNode = yy.Helper.createArrayExpression(yy, @2, @2, $2);
                 namespaceNode.addElements($2);
                 // create bundle
-                var bundleNode = createBundle(yy, @1, @2, identifierNode, namespaceNode);
+                var bundleNode = yy.Helper.createBundle(yy, @1, @2, identifierNode, namespaceNode);
 
                 // create alias
                 var aliasNode = $3;
 
-                var inheritanceNode = createArrayExpression(yy, @6, @6);
+                var inheritanceNode = yy.Helper.createArrayExpression(yy, @6, @6);
                 inheritanceNode.addElements($6);
                 // create inheritance
-                var inheritanceDeclaratorNode = createSettingsBlockInheritanceDeclaration(yy, @5, @6, createKeyword(yy, @5, @5, $5), inheritanceNode);
+                var inheritanceDeclaratorNode = yy.Helper.createSettingsBlockInheritanceDeclaration(yy, @5, @6, yy.Helper.createKeyword(yy, @5, @5, $5), inheritanceNode);
                 // get Param
-                var paramsArrayExpression = createArrayExpression(yy, @4, @4);
+                var paramsArrayExpression = yy.Helper.createArrayExpression(yy, @4, @4);
                 paramsArrayExpression.addElements($4);
                 // create setting block declaration node
-                $$ = createSettingsBlockDeclaration(yy, @1, @8);
+                $$ = yy.Helper.createSettingsBlockDeclaration(yy, @1, @8);
                 $$.bundle = bundleNode;
                 $$.inheritFrom = inheritanceDeclaratorNode;
                 $$.alias = aliasNode;
@@ -329,26 +329,26 @@ settings_block:
              }
              | IDENTIFIER hierarchy_levels APPLY parent_block_list param_value_list {
                 // create identifier 
-                var identifierNode = createIdentifier(yy, @1, @1, $1);
+                var identifierNode = yy.Helper.createIdentifier(yy, @1, @1, $1);
                 // create namespace 
-                var namespaceNode = createArrayExpression(yy, @2, @2, $2);
+                var namespaceNode = yy.Helper.createArrayExpression(yy, @2, @2, $2);
                 namespaceNode.addElements($2);
                 // create bundle
-                var bundleNode = createBundle(yy, @1, @2, identifierNode, namespaceNode);
-                var inheritanceNode = createArrayExpression(yy, @4, @4);
+                var bundleNode = yy.Helper.createBundle(yy, @1, @2, identifierNode, namespaceNode);
+                var inheritanceNode = yy.Helper.createArrayExpression(yy, @4, @4);
                 //console.log(inheritanceNode.id);
                 inheritanceNode.addElements($4);
                 //console.log(inheritanceNode.elements[0].parent.id);
                 // create inheritance
-                var inheritanceDeclaratorNode = createSettingsBlockInheritanceDeclaration(yy, @3, @4, createKeyword(yy, @3, @3, $3), inheritanceNode);
+                var inheritanceDeclaratorNode = yy.Helper.createSettingsBlockInheritanceDeclaration(yy, @3, @4, yy.Helper.createKeyword(yy, @3, @3, $3), inheritanceNode);
                 // get Param
-                var paramsArrayExpression = createArrayExpression(yy, @5, @5);
+                var paramsArrayExpression = yy.Helper.createArrayExpression(yy, @5, @5);
                 paramsArrayExpression.addElements($5);
                 // create setting block declaration node
-                $$ = createSettingsBlockDeclaration(yy, @1, @5);
+                $$ = yy.Helper.createSettingsBlockDeclaration(yy, @1, @5);
                 $$.bundle = bundleNode;
                 $$.inheritFrom = inheritanceDeclaratorNode;
-                var argsValues = createArrayExpression(yy, @5, @5);
+                var argsValues = yy.Helper.createArrayExpression(yy, @5, @5);
                 argsValues.addElements($5);
                 $$.initWith = argsValues;
   
@@ -359,19 +359,19 @@ settings_block:
              }
              | IDENTIFIER hierarchy_levels alias param_list settings_block_value {
                  // create identifier 
-                var identifierNode = createIdentifier(yy, @1, @1, $1);
+                var identifierNode = yy.Helper.createIdentifier(yy, @1, @1, $1);
                 // create namespace 
-                var namespaceNode = createArrayExpression(yy, @2, @2, $2);
+                var namespaceNode = yy.Helper.createArrayExpression(yy, @2, @2, $2);
                 namespaceNode.addElements($2);
                 // create bundle
-                var bundleNode = createBundle(yy, @1, @2, identifierNode, namespaceNode);
+                var bundleNode = yy.Helper.createBundle(yy, @1, @2, identifierNode, namespaceNode);
                 // create alias
                 var aliasNode = $3;
                 // get Param
-                var paramsArrayExpression = createArrayExpression(yy, @4, @4);
+                var paramsArrayExpression = yy.Helper.createArrayExpression(yy, @4, @4);
                 paramsArrayExpression.addElements($4);
                 // create setting block declaration node
-                $$ = createSettingsBlockDeclaration(yy, @1, @5);
+                $$ = yy.Helper.createSettingsBlockDeclaration(yy, @1, @5);
                 $$.bundle = bundleNode;
                 $$.alias = aliasNode;                
                 $$.params = paramsArrayExpression;
@@ -384,20 +384,20 @@ settings_block:
              }
              | IDENTIFIER hierarchy_levels alias TABLE settings_table_values {                 
                 // create identifier 
-                var identifierNode = createIdentifier(yy, @1, @1, $1);
+                var identifierNode = yy.Helper.createIdentifier(yy, @1, @1, $1);
                 // create namespace 
-                var namespaceNode = createArrayExpression(yy, @2, @2, $2);
+                var namespaceNode = yy.Helper.createArrayExpression(yy, @2, @2, $2);
                 namespaceNode.addElements($2);
                 // create bundle
-                var bundleNode = createBundle(yy, @1, @2, identifierNode, namespaceNode);
+                var bundleNode = yy.Helper.createBundle(yy, @1, @2, identifierNode, namespaceNode);
                 // create alias
                 var aliasNode = $3;
                 
-                var tableValues = createArrayExpression(yy, @5, @5, $5);
+                var tableValues = yy.Helper.createArrayExpression(yy, @5, @5, $5);
                 tableValues.addElements($5);
-                var valuesNodes = createTable(yy, @5, @5, createKeyword(yy, @4, @4, $4), tableValues);
+                var valuesNodes = yy.Helper.createTable(yy, @5, @5, yy.Helper.createKeyword(yy, @4, @4, $4), tableValues);
 
-                $$ = createSettingsBlockDeclaration(yy, @1, @5);
+                $$ = yy.Helper.createSettingsBlockDeclaration(yy, @1, @5);
                 $$.bundle = bundleNode;
                 $$.alias = aliasNode;
                 $$.value = valuesNodes;
@@ -413,7 +413,7 @@ settings_block:
 
 alias:
             AS IDENTIFIER {
-                $$ = createAlias(yy, @1, @2, createKeyword(yy, @1, @1, $1), createIdentifier(yy, @2, @2, $2));
+                $$ = yy.Helper.createAlias(yy, @1, @2, yy.Helper.createKeyword(yy, @1, @1, $1), yy.Helper.createIdentifier(yy, @2, @2, $2));
             }
             |
 
@@ -421,7 +421,7 @@ alias:
 
 single_param:
             PARAM_PREFIX BLOCK_VALUE_PRIMITIVE {                
-                $$ = createSettingsBlockArg(yy, @1, @2, createIdentifier(yy, @1, @1, $1), createLiteral(yy, @2, @2, $2));
+                $$ = yy.Helper.createSettingsBlockArg(yy, @1, @2, yy.Helper.createIdentifier(yy, @1, @1, $1), yy.Helper.createLiteral(yy, @2, @2, $2));
             }
             |
 ;
@@ -431,14 +431,14 @@ or block_type "level"
 */
 hierarchy_levels:
              ASCII_STRING hierarchy_levels {
-                var sbPathPart = createLiteral(yy, @1, @1, $1);                
+                var sbPathPart = yy.Helper.createLiteral(yy, @1, @1, $1);                
                 $$ = [sbPathPart];
                 if($2) {
                    $$ = $$.concat($2);
                 }                
              }
             | ASCII_STRING {
-                var sbPathPart = createLiteral(yy, @1, @1, $1);                
+                var sbPathPart = yy.Helper.createLiteral(yy, @1, @1, $1);                
                 $$ = [sbPathPart];
             }     
 
@@ -448,25 +448,25 @@ hierarchy_levels:
 parent_block_list:
             // parent block name can be either an alias identifier or full path
             IDENTIFIER COMMA_SEPARATOR parent_block_list {               
-                $$ = createSettingsblockInheritance(yy, @1, @1, $1);
+                $$ = yy.Helper.createSettingsblockInheritance(yy, @1, @1, $1);
                 $$ = [$$];
                 if($3) {
                     $$.push($3[0]);
                 }
             }
             | PARENT_BLOCK COMMA_SEPARATOR parent_block_list {              
-                $$ = createSettingsblockInheritance(yy, @1, @1, $1);
+                $$ = yy.Helper.createSettingsblockInheritance(yy, @1, @1, $1);
                 $$ = [$$];
                 if($3) {
                     $$.push($3[0]);
                 }
             }
             | PARENT_BLOCK {
-                $$ = createSettingsblockInheritance(yy, @1, @1, $1);
+                $$ = yy.Helper.createSettingsblockInheritance(yy, @1, @1, $1);
                 $$ = [$$];
             }
             | IDENTIFIER {
-                $$ = createSettingsblockInheritance(yy, @1, @1, $1);
+                $$ = yy.Helper.createSettingsblockInheritance(yy, @1, @1, $1);
                 $$ = [$$];
             }
 
@@ -474,11 +474,11 @@ parent_block_list:
 
 param_list:
             PARAM {
-                $$ = createSettingsBlockParam(yy, @1, @1, $1);
+                $$ = yy.Helper.createSettingsBlockParam(yy, @1, @1, $1);
                 $$ = [$$];
             }
             | PARAM COMMA_SEPARATOR param_list {
-                $$ = createSettingsBlockParam(yy, @1, @1, $1);
+                $$ = yy.Helper.createSettingsBlockParam(yy, @1, @1, $1);
                 $$ = [$$];
                 if($3) {
                    $$ = $$.concat($3);
@@ -492,44 +492,44 @@ param_list:
 // @param1=1, @param2="", ....
 param_value_list:
             PARAM EQUAL_OPERATOR BLOCK_VALUE_PRIMITIVE {
-                $$ = createSettingsBlockArg(yy, @1, @3, createSettingsBlockParam(yy, @1, @1, $1), createLiteral(yy, @3, @3, $3));                
+                $$ = yy.Helper.createSettingsBlockArg(yy, @1, @3, yy.Helper.createSettingsBlockParam(yy, @1, @1, $1), yy.Helper.createLiteral(yy, @3, @3, $3));                
                 $$ = [$$];
             }
             | PARAM EQUAL_OPERATOR BLOCK_VALUE_PRIMITIVE COMMA_SEPARATOR param_value_list {
-                $$ = createSettingsBlockArg(yy, @1, @3, createSettingsBlockParam(yy, @1, @1, $1), createLiteral(yy, @3, @3, $3));                
+                $$ = yy.Helper.createSettingsBlockArg(yy, @1, @3, yy.Helper.createSettingsBlockParam(yy, @1, @1, $1), yy.Helper.createLiteral(yy, @3, @3, $3));                
                 $$ = [$$];
                 if($5) {
                     $$ = $$.concat($5);
                 }
             }
             | PARAM EQUAL_OPERATOR list {
-                $$ = createSettingsBlockArg(yy, @1, @3, createSettingsBlockParam(yy, @1, @1, $1), $3);                
+                $$ = yy.Helper.createSettingsBlockArg(yy, @1, @3, yy.Helper.createSettingsBlockParam(yy, @1, @1, $1), $3);                
                 $$ = [$$];
             }
             | PARAM EQUAL_OPERATOR list COMMA_SEPARATOR param_value_list {
-                $$ = createSettingsBlockArg(yy, @1, @3, createSettingsBlockParam(yy, @1, @1, $1), $3);                
+                $$ = yy.Helper.createSettingsBlockArg(yy, @1, @3, yy.Helper.createSettingsBlockParam(yy, @1, @1, $1), $3);                
                 $$ = [$$];
                 if($5) {
                     $$ = $$.concat($5);
                 }
             }
             | PARAM EQUAL_OPERATOR ASCII_STRING {
-                $$ = createSettingsBlockArg(yy, @1, @3, createSettingsBlockParam(yy, @1, @1, $1), createLiteral(yy, @3, @3, $3));                
+                $$ = yy.Helper.createSettingsBlockArg(yy, @1, @3, yy.Helper.createSettingsBlockParam(yy, @1, @1, $1), yy.Helper.createLiteral(yy, @3, @3, $3));                
                 $$ = [$$];
             }
             | PARAM EQUAL_OPERATOR ASCII_STRING COMMA_SEPARATOR param_value_list {
-                $$ = createSettingsBlockArg(yy, @1, @3, createSettingsBlockParam(yy, @1, @1, $1), createLiteral(yy, @3, @3, $3));                
+                $$ = yy.Helper.createSettingsBlockArg(yy, @1, @3, yy.Helper.createSettingsBlockParam(yy, @1, @1, $1), yy.Helper.createLiteral(yy, @3, @3, $3));                
                 $$ = [$$];
                 if($5) {
                     $$ = $$.concat($5);
                 }
             }
             | PARAM EQUAL_OPERATOR PARENT_BLOCK {
-                $$ = createSettingsBlockArg(yy, @1, @3, createSettingsBlockParam(yy, @1, @1, $1), createJsonExpression(yy, @3, @3, $3));                
+                $$ = yy.Helper.createSettingsBlockArg(yy, @1, @3, yy.Helper.createSettingsBlockParam(yy, @1, @1, $1), yy.Helper.createJsonExpression(yy, @3, @3, $3));                
                 $$ = [$$];
             }
             | PARAM EQUAL_OPERATOR PARENT_BLOCK COMMA_SEPARATOR param_value_list {
-                $$ = createSettingsBlockArg(yy, @1, @3, createSettingsBlockParam(yy, @1, @1, $1), createJsonExpression(yy, @3, @3, $3));                
+                $$ = yy.Helper.createSettingsBlockArg(yy, @1, @3, yy.Helper.createSettingsBlockParam(yy, @1, @1, $1), yy.Helper.createJsonExpression(yy, @3, @3, $3));                
                 $$ = [$$];             
                 if($5) {
                     $$ = $$.concat($5);
@@ -542,7 +542,7 @@ param_value_list:
 settings_block_value:
                     // the value could be a primitive (integer, boolean, float)
                     BLOCK_VALUE_PRIMITIVE { 
-                        $$ = createLiteral(yy, @1, @1, $1);
+                        $$ = yy.Helper.createLiteral(yy, @1, @1, $1);
                     }
                     | list {                           
                         $$ = $1;
@@ -556,44 +556,44 @@ settings_block_value:
 
 settings_table_values:
                     ASCII_STRING EQUAL_OPERATOR BLOCK_VALUE_PRIMITIVE {
-                        $$ = createSettingsBlockArg(yy, @1, @3, createIdentifier(yy, @1, @1, $1), createLiteral(yy, @3, @3, $3));
+                        $$ = yy.Helper.createSettingsBlockArg(yy, @1, @3, yy.Helper.createIdentifier(yy, @1, @1, $1), yy.Helper.createLiteral(yy, @3, @3, $3));
                         $$ = [$$];
                     }
                     | ASCII_STRING EQUAL_OPERATOR BLOCK_VALUE_PRIMITIVE COMMA_SEPARATOR settings_table_values {                         
-                        $$ = createSettingsBlockArg(yy, @1, @3, createIdentifier(yy, @1, @1, $1), createLiteral(yy, @3, @3, $3));
+                        $$ = yy.Helper.createSettingsBlockArg(yy, @1, @3, yy.Helper.createIdentifier(yy, @1, @1, $1), yy.Helper.createLiteral(yy, @3, @3, $3));
                         $$ = [$$];
                         if($5) {
                             $$ = $$.concat($5);
                         }             
                     }
                     | ASCII_STRING EQUAL_OPERATOR ASCII_STRING {     
-                        $$ = createSettingsBlockArg(yy, @1, @3, createIdentifier(yy, @1, @1, $1), createLiteral(yy, @3, @3, $3));
+                        $$ = yy.Helper.createSettingsBlockArg(yy, @1, @3, yy.Helper.createIdentifier(yy, @1, @1, $1), yy.Helper.createLiteral(yy, @3, @3, $3));
                         $$ = [$$];
                     }
                     | ASCII_STRING EQUAL_OPERATOR ASCII_STRING COMMA_SEPARATOR settings_table_values {       
-                        $$ = createSettingsBlockArg(yy, @1, @3, createIdentifier(yy, @1, @1, $1), createLiteral(yy, @3, @3, $3));
+                        $$ = yy.Helper.createSettingsBlockArg(yy, @1, @3, yy.Helper.createIdentifier(yy, @1, @1, $1), yy.Helper.createLiteral(yy, @3, @3, $3));
                         $$ = [$$];
                         if($5) {
                             $$ = $$.concat($5);
                         }                       
                     }
                     | BLOCK_VALUE_PRIMITIVE EQUAL_OPERATOR BLOCK_VALUE_PRIMITIVE {
-                        $$ = createSettingsBlockArg(yy, @1, @3, createIdentifier(yy, @1, @1, $1), createLiteral(yy, @3, @3, $3));
+                        $$ = yy.Helper.createSettingsBlockArg(yy, @1, @3, yy.Helper.createIdentifier(yy, @1, @1, $1), yy.Helper.createLiteral(yy, @3, @3, $3));
                         $$ = [$$];
                     }
                     | BLOCK_VALUE_PRIMITIVE EQUAL_OPERATOR BLOCK_VALUE_PRIMITIVE COMMA_SEPARATOR settings_table_values {    
-                        $$ = createSettingsBlockArg(yy, @1, @3, createIdentifier(yy, @1, @1, $1), createLiteral(yy, @3, @3, $3));
+                        $$ = yy.Helper.createSettingsBlockArg(yy, @1, @3, yy.Helper.createIdentifier(yy, @1, @1, $1), yy.Helper.createLiteral(yy, @3, @3, $3));
                         $$ = [$$];
                         if($5) {
                             $$ = $$.concat($5);
                         }                          
                     }
                     | BLOCK_VALUE_PRIMITIVE EQUAL_OPERATOR ASCII_STRING {
-                        $$ = createSettingsBlockArg(yy, @1, @3, createIdentifier(yy, @1, @1, $1), createLiteral(yy, @3, @3, $3));
+                        $$ = yy.Helper.createSettingsBlockArg(yy, @1, @3, yy.Helper.createIdentifier(yy, @1, @1, $1), yy.Helper.createLiteral(yy, @3, @3, $3));
                         $$ = [$$];
                     }
                     | BLOCK_VALUE_PRIMITIVE EQUAL_OPERATOR ASCII_STRING COMMA_SEPARATOR settings_table_values {       
-                        $$ = createSettingsBlockArg(yy, @1, @3, createIdentifier(yy, @1, @1, $1), createLiteral(yy, @3, @3, $3));
+                        $$ = yy.Helper.createSettingsBlockArg(yy, @1, @3, yy.Helper.createIdentifier(yy, @1, @1, $1), yy.Helper.createLiteral(yy, @3, @3, $3));
                         $$ = [$$];
                         if($5) {
                             $$ = $$.concat($5);
@@ -605,7 +605,7 @@ settings_table_values:
 
 // match complex configuration block
 config_block: BLOCK_VALUE_COMPLEX_START config_block_content BLOCK_VALUE_COMPLEX_END {
-                $$ = createSettingsBlockComplexValue(yy, @1, @3);
+                $$ = yy.Helper.createSettingsBlockComplexValue(yy, @1, @3);
                 $$.addElements($2);
                 @$.first_line = @1.first_line;
                 @$.first_column = @1.first_column;
@@ -613,7 +613,7 @@ config_block: BLOCK_VALUE_COMPLEX_START config_block_content BLOCK_VALUE_COMPLEX
                 @$.last_column = @3.last_column;                
             }
             | BLOCK_VALUE_COMPLEX_START BLOCK_VALUE_COMPLEX_END {
-                $$ = createSettingsBlockComplexValue(yy, @1, @2);
+                $$ = yy.Helper.createSettingsBlockComplexValue(yy, @1, @2);
                 @$.first_line = @1.first_line;
                 @$.first_column = @1.first_column;
                 @$.last_line = @2.last_line;
@@ -625,12 +625,12 @@ config_block: BLOCK_VALUE_COMPLEX_START config_block_content BLOCK_VALUE_COMPLEX
 config_block_content:
             // key = value
             IDENTIFIER EQUAL_OPERATOR BLOCK_VALUE_PRIMITIVE {
-                $$ = createSettingsBlockPropertyDeclarator(yy, @1, @3, createIdentifier(yy, @1, @1, $1), createLiteral(yy, @3, @3, $3));                
+                $$ = yy.Helper.createSettingsBlockPropertyDeclarator(yy, @1, @3, yy.Helper.createIdentifier(yy, @1, @1, $1), yy.Helper.createLiteral(yy, @3, @3, $3));                
                 $$ = [$$];
             }           
             // key1 = value, key2 = value
             | IDENTIFIER EQUAL_OPERATOR BLOCK_VALUE_PRIMITIVE COMMA_SEPARATOR config_block_content {
-                $$ = createSettingsBlockPropertyDeclarator(yy, @1, @3, createIdentifier(yy, @1, @1, $1), createLiteral(yy, @3, @3, $3));
+                $$ = yy.Helper.createSettingsBlockPropertyDeclarator(yy, @1, @3, yy.Helper.createIdentifier(yy, @1, @1, $1), yy.Helper.createLiteral(yy, @3, @3, $3));
                 $$ = [$$];
                 if($5) {
                     $$ = $$.concat($5);
@@ -638,23 +638,23 @@ config_block_content:
             }
             // key = @Param
             | IDENTIFIER EQUAL_OPERATOR PARAM {
-                $$ = createSettingsBlockPropertyDeclarator(yy, @1, @3, createIdentifier(yy, @1, @1, $1), createSettingsBlockParam(yy, @3, @3, $3));
+                $$ = yy.Helper.createSettingsBlockPropertyDeclarator(yy, @1, @3, yy.Helper.createIdentifier(yy, @1, @1, $1), yy.Helper.createSettingsBlockParam(yy, @3, @3, $3));
                 $$ = [$$];
             }
             // key = @Param, ...
             | IDENTIFIER EQUAL_OPERATOR PARAM COMMA_SEPARATOR config_block_content {
-                $$ = createSettingsBlockPropertyDeclarator(yy, @1, @3, createIdentifier(yy, @1, @1, $1), createSettingsBlockParam(yy, @3, @3, $3));
+                $$ = yy.Helper.createSettingsBlockPropertyDeclarator(yy, @1, @3, yy.Helper.createIdentifier(yy, @1, @1, $1), yy.Helper.createSettingsBlockParam(yy, @3, @3, $3));
                 $$ = [$$];
                 if($5) {
                     $$  = $$.concat($5);
                 }
             }
             | IDENTIFIER EQUAL_OPERATOR ASCII_STRING {
-                $$ = createSettingsBlockPropertyDeclarator(yy, @1, @3, createIdentifier(yy, @1, @1, $1), createLiteral(yy, @3, @3, $3));
+                $$ = yy.Helper.createSettingsBlockPropertyDeclarator(yy, @1, @3, yy.Helper.createIdentifier(yy, @1, @1, $1), yy.Helper.createLiteral(yy, @3, @3, $3));
                 $$ = [$$];
             } 
             | IDENTIFIER EQUAL_OPERATOR ASCII_STRING COMMA_SEPARATOR config_block_content {
-                $$ = createSettingsBlockPropertyDeclarator(yy, @1, @3, createIdentifier(yy, @1, @1, $1), createLiteral(yy, @3, @3, $3));
+                $$ = yy.Helper.createSettingsBlockPropertyDeclarator(yy, @1, @3, yy.Helper.createIdentifier(yy, @1, @1, $1), yy.Helper.createLiteral(yy, @3, @3, $3));
                 $$ = [$$];
                 if($5) {
                     $$ = $$.concat($5);
@@ -662,11 +662,11 @@ config_block_content:
             } 
             // key = []
             | IDENTIFIER EQUAL_OPERATOR list {
-                $$ = createSettingsBlockPropertyDeclarator(yy, @1, @3, createIdentifier(yy, @1, @1, $1), $3);
+                $$ = yy.Helper.createSettingsBlockPropertyDeclarator(yy, @1, @3, yy.Helper.createIdentifier(yy, @1, @1, $1), $3);
                 $$ = [$$];
             } // key = [1,2,3], ...
             | IDENTIFIER EQUAL_OPERATOR list COMMA_SEPARATOR config_block_content {
-                $$ = createSettingsBlockPropertyDeclarator(yy, @1, @3, createIdentifier(yy, @1, @1, $1), $3);
+                $$ = yy.Helper.createSettingsBlockPropertyDeclarator(yy, @1, @3, yy.Helper.createIdentifier(yy, @1, @1, $1), $3);
                 $$ = [$$];
                 if($5) {
                     $$ = $$.concat($5);
@@ -674,12 +674,12 @@ config_block_content:
             }
             // key = {...} 
             | IDENTIFIER EQUAL_OPERATOR config_block {
-                $$ = createSettingsBlockPropertyDeclarator(yy, @1, @3, createIdentifier(yy, @1, @1, $1), $3);
+                $$ = yy.Helper.createSettingsBlockPropertyDeclarator(yy, @1, @3, yy.Helper.createIdentifier(yy, @1, @1, $1), $3);
                 $$ = [$$];
             }
             // key = {...}, key = value
             | IDENTIFIER EQUAL_OPERATOR config_block COMMA_SEPARATOR config_block_content {
-               $$ = createSettingsBlockPropertyDeclarator(yy, @1, @3, createIdentifier(yy, @1, @1, $1), $3);
+               $$ = yy.Helper.createSettingsBlockPropertyDeclarator(yy, @1, @3, yy.Helper.createIdentifier(yy, @1, @1, $1), $3);
                $$ = [$$];
                if($5) {
                    $$ = $$.concat($5);
@@ -690,11 +690,11 @@ config_block_content:
                 $$ = $1;
             }
             | IDENTIFIER EQUAL_OPERATOR PARENT_BLOCK {
-                $$ = createSettingsBlockPropertyDeclarator(yy, @1, @3, createIdentifier(yy, @1, @1, $1), createJsonExpression(yy, @3, @3, $3));
+                $$ = yy.Helper.createSettingsBlockPropertyDeclarator(yy, @1, @3, yy.Helper.createIdentifier(yy, @1, @1, $1), yy.Helper.createJsonExpression(yy, @3, @3, $3));
                 $$ = [$$];
             }
             | IDENTIFIER EQUAL_OPERATOR PARENT_BLOCK COMMA_SEPARATOR config_block_content {
-                $$ = createSettingsBlockPropertyDeclarator(yy, @1, @3, createIdentifier(yy, @1, @1, $1), createJsonExpression(yy, @3, @3, $3));
+                $$ = yy.Helper.createSettingsBlockPropertyDeclarator(yy, @1, @3, yy.Helper.createIdentifier(yy, @1, @1, $1), yy.Helper.createJsonExpression(yy, @3, @3, $3));
                 $$ = [$$];
                 if($5) {
                    $$ = $$.concat($5); 
@@ -706,7 +706,7 @@ config_block_content:
 // list
 list:
             OPEN_BRACKET list_elements CLOSE_BRACKET {
-                $$ = createArrayExpression(yy, @1, @3);   
+                $$ = yy.Helper.createArrayExpression(yy, @1, @3);   
                 $$.addElements($2);                
                 @$.first_column = @1.first_column;
                 @$.first_line = @1.first_line;
@@ -715,7 +715,7 @@ list:
             }
             // empty list
             | OPEN_BRACKET CLOSE_BRACKET {
-                $$ = createArrayExpression(yy, @1, @2); 
+                $$ = yy.Helper.createArrayExpression(yy, @1, @2); 
                 @$.last_column = @2.last_column;
                 @$.last_line = @2.last_line;    
             }
@@ -739,10 +739,10 @@ list_elements:
 // list single element
 list_element:
             BLOCK_VALUE_PRIMITIVE {
-                $$ = createLiteral(yy, @1, @1, $1);                
+                $$ = yy.Helper.createLiteral(yy, @1, @1, $1);                
             }
             | ASCII_STRING {
-                $$ = createLiteral(yy, @1, @1, $1);
+                $$ = yy.Helper.createLiteral(yy, @1, @1, $1);
             }
             | list {
                 $$ = $1;
@@ -751,20 +751,20 @@ list_element:
                 $$ = $1;
             }
             | PARENT_BLOCK {
-                $$ = createJsonExpression(yy, @1, @1, $1);                         
+                $$ = yy.Helper.createJsonExpression(yy, @1, @1, $1);                         
             }
             ;
 
 list_settings_subblock:
             settings_block list_settings_subblock {
-                $$ = createSettingsBlockPropertyDeclarator(yy, @1, @1, createIdentifier(yy, @1, @1, null), $1);  
+                $$ = yy.Helper.createSettingsBlockPropertyDeclarator(yy, @1, @1, yy.Helper.createIdentifier(yy, @1, @1, null), $1);  
                 $$ = [$$];
                 if($2) {
                     $$ = $$.concat($2);
                 }
             }
             | settings_block {
-                $$ = createSettingsBlockPropertyDeclarator(yy, @1, @1, createIdentifier(yy, @1, @1, null), $1);  
+                $$ = yy.Helper.createSettingsBlockPropertyDeclarator(yy, @1, @1, yy.Helper.createIdentifier(yy, @1, @1, null), $1);  
                 $$ = [$$];
             }
 
@@ -775,12 +775,12 @@ import_block:
             // take file1,...
             TAKE_DECLARATION import_list {
                 // create keyword node
-                var keywordNode = createKeyword(yy, @1, @1, $1);
+                var keywordNode = yy.Helper.createKeyword(yy, @1, @1, $1);
                 // create import array expression node
-                var importArrayExpressionNode = createArrayExpression(yy, @2, @2);
+                var importArrayExpressionNode = yy.Helper.createArrayExpression(yy, @2, @2);
                 importArrayExpressionNode.addElements($2);
                 // create import declaration
-                var importDeclartion = createImportDeclaration(yy, @1, @2, keywordNode, importArrayExpressionNode);
+                var importDeclartion = yy.Helper.createImportDeclaration(yy, @1, @2, keywordNode, importArrayExpressionNode);
 
                 @$.first_column = @1.first_column;
                 @$.first_line = @1.first_line;
@@ -794,7 +794,7 @@ import_block:
 // list of imported configuration files
 import_list:
             FILE_NAME IMPORT_SEPARATOR import_list {  
-                var importFileNode = createImportFile(yy, @1, @1, $1);                            
+                var importFileNode = yy.Helper.createImportFile(yy, @1, @1, $1);                            
                 $$ = [importFileNode];
                 if($3) {
                   @$.first_column = @1.first_column;
@@ -805,138 +805,10 @@ import_list:
                 }              
             }
             | FILE_NAME {
-                var importFileNode = createImportFile(yy, @1, @1, $1);                             
+                var importFileNode = yy.Helper.createImportFile(yy, @1, @1, $1);                             
                 $$ = [importFileNode];
             }
 
             ;
 %%
 
-// create ConfigurationFile instance
-function createConfigurationFile(yy, startLoc, endLoc) {
-    return new yy.ConfigurationFile(yy.ConfigurationFile.BuildContextWith(yy.fileURI, yy.fileHash, startLoc.first_column, startLoc.first_line, endLoc.last_column, endLoc.last_line));
-}
-
-// create Keyword instance
-function createKeyword(yy, startLoc, endLoc, keyword) {
-    return new yy.Keyword(
-            yy.ImportDeclaration.BuildContextWith(yy.fileURI, yy.fileHash, startLoc.first_column, startLoc.first_line, endLoc.last_column, endLoc.last_line),
-            keyword
-    );
-}
-
-// create literal
-function createLiteral(yy, startLoc, endLoc, data) {
-    return new yy.Literal(
-            yy.ImportDeclaration.BuildContextWith(yy.fileURI, yy.fileHash, startLoc.first_column, startLoc.first_line, endLoc.last_column, endLoc.last_line),
-            data
-    );
-}
-
-// create a new instance of ArrayExpression
-function createArrayExpression(yy, startLoc, endLoc) {
-    return new yy.ArrayExpression(
-            yy.ImportDeclaration.BuildContextWith(yy.fileURI, yy.fileHash, startLoc.first_column, startLoc.first_line, endLoc.last_column, endLoc.last_line)
-    );
-}
-
-function createTable(yy, startLoc, endLoc, keyword, values) {
-    return new yy.Table(
-            yy.ImportDeclaration.BuildContextWith(yy.fileURI, yy.fileHash, startLoc.first_column, startLoc.first_line, endLoc.last_column, endLoc.last_line),
-            keyword, values
-    );
-}
-
-function createIdentifier(yy, startLoc, endLoc, identifier) {
-    return new yy.Identifier(
-            yy.ImportDeclaration.BuildContextWith(yy.fileURI, yy.fileHash, startLoc.first_column, startLoc.first_line, endLoc.last_column, endLoc.last_line),
-            identifier
-    );
-}
-
-function createSettingsBlockParam(yy, startLoc, endLoc, Param) {
-    return new yy.Param(
-            yy.ImportDeclaration.BuildContextWith(yy.fileURI, yy.fileHash, startLoc.first_column, startLoc.first_line, endLoc.last_column, endLoc.last_line),
-            Param
-    );
-}
-
-function createSettingsBlockArg(yy, startLoc, endLoc, arg, value) {
-    return new yy.Arg(
-            yy.ImportDeclaration.BuildContextWith(yy.fileURI, yy.fileHash, startLoc.first_column, startLoc.first_line, endLoc.last_column, endLoc.last_line),
-            arg,
-            value
-    );
-}
-
-function createAlias(yy, startLoc, endLoc, keyword, identifier) {
-    return new yy.Alias(
-            yy.ImportDeclaration.BuildContextWith(yy.fileURI, yy.fileHash, startLoc.first_column, startLoc.first_line, endLoc.last_column, endLoc.last_line),
-            keyword,
-            identifier
-    );
-}
-
-function createJsonExpression(yy, startLoc, endLoc, expression) {
-    return new yy.JSONPathExpression(
-           yy.ImportDeclaration.BuildContextWith(yy.fileURI, yy.fileHash, startLoc.first_column, startLoc.first_line, endLoc.last_column, endLoc.last_line),
-           expression     
-    );
-}
-
-// create ImportDeclaration instance
-function createImportDeclaration(yy, startLoc, endLoc, keyword, importedFiles) {
-    return new yy.ImportDeclaration(
-            yy.ImportDeclaration.BuildContextWith(yy.fileURI, yy.fileHash, startLoc.first_column, startLoc.first_line, endLoc.last_column, endLoc.last_line),
-            keyword, 
-            importedFiles
-    );
-}
-
-function createSettingsBlockPropertyDeclarator(yy, startLoc, endLoc, identifier, value) {
-    return new yy.PropertyDeclarator(yy.ImportDeclaration.BuildContextWith(yy.fileURI, yy.fileHash, startLoc.first_column, startLoc.first_line, endLoc.last_column, endLoc.last_line),
-        identifier, value
-    );
-}
-
-function createSettingsBlockComplexValue(yy, startLoc, endLoc) {
-    return new yy.ComplexValue(yy.ImportDeclaration.BuildContextWith(yy.fileURI, yy.fileHash, startLoc.first_column, startLoc.first_line, endLoc.last_column, endLoc.last_line));
-}
-
-function createSettingsBlockInheritanceDeclaration(yy, startLoc, endLoc, keyword, inheritance) {
-    return new yy.InheritanceDeclaration(
-        yy.ImportDeclaration.BuildContextWith(yy.fileURI, yy.fileHash, startLoc.first_column, startLoc.first_line, endLoc.last_column, endLoc.last_line),
-        keyword, 
-        inheritance
-    );
-}
-
-function createSettingsblockInheritance(yy, startLoc, endLoc, path) {
-    return new yy.Inheritance(
-        yy.ImportDeclaration.BuildContextWith(yy.fileURI, yy.fileHash, startLoc.first_column, startLoc.first_line, endLoc.last_column, endLoc.last_line),
-        path
-    );
-}
-
-
-function createImportFile(yy, startLoc, endLoc, file) {
-    return new yy.Dependency(
-            yy.ImportDeclaration.BuildContextWith(yy.fileURI, yy.fileHash, startLoc.first_column, startLoc.first_line, endLoc.last_column, endLoc.last_line),
-            file
-    );
-}
-
-function createBundle(yy, startLoc, endLoc, identifier, ns) {
-    return new yy.Bundle(yy.ImportDeclaration.BuildContextWith(yy.fileURI, yy.fileHash, startLoc.first_column, startLoc.first_line, endLoc.last_column, endLoc.last_line),
-            identifier, ns
-    );
-}
-
-function createSettingsBlockDeclaration(yy, startLoc, endLoc) {
-    return new yy.SettingsBlockDeclaration(yy.ImportDeclaration.BuildContextWith(yy.fileURI, yy.fileHash, startLoc.first_column, startLoc.first_line, endLoc.last_column, endLoc.last_line));
-}
-
-
-function createEOF(yy, endLoc) {
-    return new yy.EOF(yy.ImportDeclaration.BuildContextWith(yy.fileURI, yy.fileHash, endLoc.last_column, endLoc.last_line, endLoc.last_column, endLoc.last_line));
-}
