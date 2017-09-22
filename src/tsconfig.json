@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "outDir": "../dist",
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./*"]
+    },
+    "module": "commonjs",
+    "target": "es6",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "removeComments": false,
+    "moduleResolution": "node",
+    "declaration": true
+  }
+}

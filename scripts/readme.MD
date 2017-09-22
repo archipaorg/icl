@@ -1,0 +1,1 @@
+The script build.sh manages files distribution

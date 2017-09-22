@@ -1,0 +1,53 @@
+{
+  "name": "@archipa/icl",
+  "version": "1.0.1",
+  "author": "Mahieddine CHERIF <mahied.cherif@gmail.com>",
+  "contributors": [
+    "Mahieddine CHERIF",
+    "Farah MAAMAR"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/archipaorg/icl"
+  },
+  "homepage": "https://github.com/archipaorg/icl/blob/master/README.md",
+  "license": "MPL 2.0",
+  "scripts": {
+    "pretest": "rm -rf ./dist/* && ./scripts/build.sh && tsc -p ./src",
+    "test": "./node_modules/mocha/bin/mocha --recursive ./tests",
+    "test:unit": "./node_modules/mocha/bin/mocha --recursive  ./tests/unit",
+    "test:int": "./node_modules/mocha/bin/mocha --recursive  ./tests/integration",
+    "test:acc": "./node_modules/mocha/bin/mocha --recursive  ./tests/acceptance"
+  },
+  "dependencies": {
+    "chai": "^4.1.0",
+    "chokidar": "^1.7.0",
+    "escape-string-regexp": "^1.0.5",
+    "extend": "^3.0.1",
+    "mocha": "^3.4.2",
+    "object-path": "^0.11.4",
+    "unset": "0.0.2",
+    "winston": "^2.3.1"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.1",
+    "@types/chokidar": "^1.7.1",
+    "@types/escape-string-regexp": "0.0.31",
+    "@types/extend": "^2.0.30",
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^8.0.17",
+    "@types/node-cache": "^4.1.0",
+    "@types/object-path": "^0.9.28",
+    "@types/winston": "^2.3.4",
+    "jison": "^0.4.17",
+    "jison2json": "0.0.2",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.4.2"
+  },
+  "keywords": [
+    "configuration language",
+    "automation",
+    "icl",
+    "ichiro"
+  ]
+}
