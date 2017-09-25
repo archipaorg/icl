@@ -11,7 +11,7 @@
 
 port "http" apply WebApp @@port = app.webapp.listenOn*/
 
-::app "webapp" as WebApp @parentKey, @sex {
+::app "webapp" as WebApp @parentKey {
 
 }
 
