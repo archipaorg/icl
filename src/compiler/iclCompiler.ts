@@ -97,7 +97,14 @@ export class ICLCompiler implements IICLCompiler<string, ConfigurationFile>, IDi
                 // inject current file URI and file content fileHash in yy context
                 this.lexYaccParser.yy.fileURI = resource.uri;
                 this.lexYaccParser.yy.fileHash = resource.hash;
-                resource.parsedContent = this.lexYaccParser.parse(resource.content());
+                resource.parsedContent = this.lexYaccParser.parse(resource.content()) || new ConfigurationFile(<Loc>{
+                    file_uri: resource.uri,
+                    file_hash: resource.hash,
+                    first_line: 0,
+                    first_column: 0,
+                    last_line: 0,
+                    last_column: 0
+                });
             }
 
             allConfigurations.unshift(resource.parsedContent);
