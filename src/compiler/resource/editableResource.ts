@@ -6,6 +6,8 @@ import {
     ICacheableResource, IEditableResource, IParseableResource, IResource,
     IWatchableResource
 } from '../../core/types/resource';
+import {readFileSync, existsSync} from 'fs';
+import * as Path from 'path';
 
 /**
  * An editable resource represents a resource that is opened in an editor for example
@@ -22,6 +24,32 @@ export class EditableResource<L, T> extends FsResource<L, T> implements IEditabl
                 parent?: IResource<L> & IWatchableResource & ICacheableResource<string> & IDisposable & IParseableResource<T>) {
         super(uri, parent);
         this.loadOnlyFromCache = true;
+    }
+
+    /**
+     * returns resource location uri
+     * @returns {string}
+     */
+    public get uri(): string {
+        if (!this._resolvedUri) {
+
+            let found = false;
+
+            let retrievalAttempts = [this._parent && !Path.isAbsolute(this._uri) ? Path.join(Path.dirname(this._parent.uri), this._uri) : this._uri]
+                .concat(this.searchIn.map((folder) => {
+                    return Path.join(folder, this._uri);
+                }));
+
+            while (!found && retrievalAttempts.length > 0) {
+                let retrievalAttempt = <string>retrievalAttempts.shift();
+                if (existsSync(retrievalAttempt)) {
+                    found = true;
+                    this._resolvedUri = true;
+                    this._uri = retrievalAttempt;
+                }
+            }
+        }
+        return this._uri;
     }
 
     /**

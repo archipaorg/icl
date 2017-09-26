@@ -18,18 +18,18 @@ export class FsResource<L, T> implements IResource<L>, IWatchableResource, ICach
      * default icl configuration fileHash name extension
      * @const {string}
      */
-    private static DEFAULT_SETTINGS_FILENAME_EXT: string = '.icl';
+    protected static DEFAULT_SETTINGS_FILENAME_EXT: string = '.icl';
 
-    private _uri: string;
-    private _searchIn: Array<string>;
-    private _description: string | undefined;
-    private _parent: IResource<L> | undefined;
-    private _cacheManager: ICacheResourceManager<IResource<L>>;
-    private _hasChanged: boolean;
-    private _parsedContent: T;
-    private _watcher: IWatcher;
+    protected _uri: string;
+    protected _searchIn: Array<string>;
+    protected _description: string | undefined;
+    protected _parent: IResource<L> | undefined;
+    protected _cacheManager: ICacheResourceManager<IResource<L>>;
+    protected _hasChanged: boolean;
+    protected _parsedContent: T;
+    protected _watcher: IWatcher;
     // indicate if we've already performed a uri resolution or not
-    private _resolvedUri: boolean;
+    protected _resolvedUri: boolean;
 
     constructor(uri: string,
                 parent?: IResource<L> & IWatchableResource & ICacheableResource<string> & IDisposable & IParseableResource<T>,
@@ -59,7 +59,7 @@ export class FsResource<L, T> implements IResource<L>, IWatchableResource, ICach
 
             let found = false;
 
-            let retrievalAttempts = [this._parent && !Path.isAbsolute(this._uri) ? Path.dirname(this._parent.uri) + Path.sep + this._uri : this._uri]
+            let retrievalAttempts = [this._parent && !Path.isAbsolute(this._uri) ? Path.join(Path.dirname(this._parent.uri), this._uri) : this._uri]
                 .concat(this.searchIn.map((folder) => {
                     return Path.join(folder, this._uri);
                 }));
