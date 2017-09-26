@@ -119,11 +119,7 @@ export class FsResource<L, T> implements IResource<L>, IWatchableResource, ICach
      * @returns {string}
      */
     public get hash(): string {
-        if (this.content()) {
-            return ObjUtils.hash(this.content().toString());
-        } else {
-            throw new Error('Can\'t hash the resource\'s content because it couldn\'t be opened');
-        }
+        return ObjUtils.hash(this.content() ? this.content().toString() : '');
     }
 
     /**
