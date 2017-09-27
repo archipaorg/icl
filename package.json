@@ -14,7 +14,7 @@
   "license": "MPL-2.0",
   "scripts": {
     "pretest": "rm -rf ./dist/* && ./scripts/build.sh && tsc -p ./src",
-    "test": "mocha --recursive ./test",
+    "test": "mocha --recursive",
     "test:unit": "mocha --recursive  ./test/unit",
     "test:int": "mocha --recursive  ./test/integration",
     "test:acc": "mocha --recursive  ./test/acceptance"
