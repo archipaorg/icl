@@ -16,3 +16,5 @@ deploy:
   on:
     tags: true
     repo: archipaorg/icl
+script:
+  - npm test
