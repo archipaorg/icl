@@ -12,5 +12,5 @@ deploy:
   on:
     tags: true
     repo: archipaorg/icl
-scripts:
+script:
 - mocha --recursive /home/travis/build/archipaorg/icl/test
