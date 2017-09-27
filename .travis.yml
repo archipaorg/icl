@@ -14,3 +14,4 @@ deploy:
   on:
     tags: true
     repo: archipaorg/icl
+    branch: master
