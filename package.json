@@ -14,10 +14,10 @@
   "license": "MPL-2.0",
   "scripts": {
     "pretest": "rm -rf ./dist/* && ./scripts/build.sh && tsc -p ./src",
-    "test": "./node_modules/mocha/bin/mocha --recursive ./tests",
-    "test:unit": "./node_modules/mocha/bin/mocha --recursive  ./tests/unit",
-    "test:int": "./node_modules/mocha/bin/mocha --recursive  ./tests/integration",
-    "test:acc": "./node_modules/mocha/bin/mocha --recursive  ./tests/acceptance"
+    "test": "mocha --recursive ./test",
+    "test:unit": "mocha --recursive  ./test/unit",
+    "test:int": "mocha --recursive  ./test/integration",
+    "test:acc": "mocha --recursive  ./test/acceptance"
   },
   "dependencies": {
     "chai": "^4.1.0",

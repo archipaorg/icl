@@ -1,10 +1,6 @@
 language: node_js
 node_js:
-- '8'
-- '7'
-- '6'
-before_install:
-- npm install -g typescript@2.1.4
+- "stable"
 cache:
   directories:
     - node_modules
@@ -16,5 +12,3 @@ deploy:
   on:
     tags: true
     repo: archipaorg/icl
-script:
-  - npm test

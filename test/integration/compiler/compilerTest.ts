@@ -16,7 +16,7 @@ describe('Int::Native ICL Parser', function () {
     });
 
     after(function () {
-        // runs after all tests in this block
+        // runs after all test in this block
     });
 
     beforeEach(function () {
