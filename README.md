@@ -1,6 +1,7 @@
  
 # ICL (Ichiro Configuration Language)
-[![Build Status](https://travis-ci.org/archipaorg/icl.svg?branch=master)](https://travis-ci.org/archipaorg/icl)[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
+[![Build Status](https://travis-ci.org/archipaorg/icl.svg?branch=master)](https://travis-ci.org/archipaorg/icl)
+[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
 
 ICL is a configuration language, that aims to provide a concise and elegant way to describe your configurations files. Moreover ICL relies on some powerfull concepts taken from the OO world (such as inheritance, class, mixins...)  without falling into the trap of becoming a programming language.
 
