@@ -13,9 +13,9 @@ export class ObjUtils {
      * @Param value value of the key
      * @returns {*}
      */
-    static createMultilevelProperty(obj: object, keyPath: Array<string> | string, value: any) {
+    static createMultilevelProperty(obj: any, keyPath: Array<string> | string, value: any) {
 
-        let currentObject: object = obj;
+        let currentObject: any = obj;
 
         if (keyPath == undefined || (keyPath.length === 0 && typeof value !== 'object')) {
             return obj;
@@ -68,7 +68,7 @@ export class ObjUtils {
      * or in array form e.g. [myproperty, mysubproperty]
      * @returns {*}
      */
-    static getMultilevelProperty(obj: object, path: Array<string> | string) {
+    static getMultilevelProperty(obj: any, path: Array<string> | string) {
         return objectPath.get(obj, path);
     }
 

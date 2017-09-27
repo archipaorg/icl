@@ -281,7 +281,7 @@ export class ICLCompiler implements IICLCompiler<string, ConfigurationFile>, IDi
                 // create fake keyword token
                 let keyword: Keyword = new Keyword(loc, 'from');
                 // create fake from declaration
-                let fromDeclaration: ArrayExpression<Inheritance> = new ArrayExpression(loc);
+                let fromDeclaration: ArrayExpression<Inheritance> = new ArrayExpression<Inheritance>(loc);
                 fromDeclaration.addElement(new Inheritance(loc, dbDeclaration.bundle.getJSONFullPath()));
                 // set a fake inheritance declaration
                 sbDeclaration.inheritFrom = new InheritanceDeclaration(loc, keyword, fromDeclaration);
