@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+- '8'
+- '7'
+- '6'
+deploy:
+  provider: npm
+  email: mahied.cherif@gmail.com
+  api_key:
+    secure: tfiE836x+mac526DAwUTV4oKEZwPzJ+MLwX22QqE+Pb535/u+kyA0oNNBmgZ9tmaSaVXb2M+dT6ooKtRrDSF+HARRBARoyoDpUfW6MNTTBpJlul2pichAD/lnoedgoOYJFEPvlPtF5t4bafSCmdvvqZtCIsKxkKNk1EAMj26a4kaTS8wKCuF1inwP8Q5WMbsRGeAnnXGbi9aibKKCFMPSzMNkzRPtG9q6QNCKbCMxmkKkTctLLxo0v5e+rMoHlRetGA5U/iaV8+8AsdE38b996gznCnIaylp1L1cnEQi0SKyLCm4LP0FI7ore1ndMPIEC5j9KBFw1hmGBvyobTjCFhq96GXVtY8NwoNnkCPtbdWPHG+J69QC+9EAc8R1LrJAR2a0RZo/R6uNvZtAEHWhariXkwchl8fmPudG4CuhS+428E/RYO+3/X1HPbwKkuF6Uz1CjGCq9dL8hlmxdZSpHsvzpslV/K8h+xgQf1Vg2SDI7XmPmvzc+EcPfL4d4uaVSCgFugeu1ibK9Xx2Rt0unYLox8unwRNT+fUd9Qk5idZouo0BaJuSOz3rVZUU8V54ARQhtOcXOGOLyWG1QEhBzDiMwa6zY9EtGp4tMHiYB9l5W6Gy/kt+LgxaA8vStrV7e5KBQSNmfTvPlrFoCQVTJfOHHsDwf7PQS7ooZ7Tcod0=
+  on:
+    tags: true
+    repo: archipaorg/icl

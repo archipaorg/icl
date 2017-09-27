@@ -49,5 +49,8 @@
     "automation",
     "icl",
     "ichiro"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
