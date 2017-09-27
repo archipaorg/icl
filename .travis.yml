@@ -5,6 +5,8 @@ cache:
   directories:
     - node_modules
 deploy:
+  tag: next
+  skip_cleanup: true
   provider: npm
   email: mahied.cherif@gmail.com
   api_key:
